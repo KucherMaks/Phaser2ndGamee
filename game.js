@@ -3,6 +3,14 @@ var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
+    // фізика гри
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
     scene: {
         preload: preload,
         create: create,
@@ -25,11 +33,22 @@ function preload ()
     );
 }
 
+var platforms;
+
 function create ()
 {
-    // тло та зірочка
+    // тло
     this.add.image(400, 300, 'sky');
-    this.add.image(400, 300, 'star');
+    
+    platforms = this.physics.add.staticGroup();
+
+    // земля
+    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+
+    //платформи
+    platforms.create(600, 400, 'ground');
+    platforms.create(50, 250, 'ground');
+    platforms.create(750, 220, 'ground');
 }
 
 function update ()
