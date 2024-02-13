@@ -1,4 +1,5 @@
 var config = {
+    // налаштування вигляду гри
     type: Phaser.AUTO,
     width: 800,
     height: 600,
@@ -13,10 +14,22 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
+    // передзавантаження хмар, землі, зірочок та бомб, налаштування виду гравця
+    this.load.image('sky', 'assets/sky.png');
+    this.load.image('ground', 'assets/platform.png');
+    this.load.image('star', 'assets/star.png');
+    this.load.image('bomb', 'assets/bomb.png');
+    this.load.spritesheet('dude', 
+        'assets/dude.png',
+        { frameWidth: 32, frameHeight: 48 }
+    );
 }
 
 function create ()
 {
+    // тло та зірочка
+    this.add.image(400, 300, 'sky');
+    this.add.image(400, 300, 'star');
 }
 
 function update ()
