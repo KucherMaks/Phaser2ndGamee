@@ -73,6 +73,9 @@ function create() {
         frameRate: 10,
         repeat: -1
     });
+
+    // коллайдер гравця та платформ
+    this.physics.add.collider(player, platforms);
 }
 
 function update() {
