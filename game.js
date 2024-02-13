@@ -98,6 +98,9 @@ function create() {
 
     //  стикання колайдера гравця з колайдером зірочок
     this.physics.add.overlap(player, stars, collectStar, null, this);
+
+    //  рахунок
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 }
 
 function update() 
@@ -128,4 +131,11 @@ function update()
 function collectStar (player, star)
 {
     star.disableBody(true, true);
+
+    score += 10;
+    scoreText.setText('Score: ' + score);
 }
+
+// змінні для рахунку
+var score = 0;
+var scoreText;
