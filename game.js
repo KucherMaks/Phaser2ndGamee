@@ -79,6 +79,25 @@ function create() {
 
     //  задання управління
     cursors = this.input.keyboard.createCursorKeys();
+
+    // зірочки
+    stars = this.physics.add.group({
+        key: 'star',
+        repeat: 11,
+        setXY: { x: 12, y: 0, stepX: 70 }
+    });
+    
+    stars.children.iterate(function (child) {
+    
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    
+    });
+
+    // коллайдер зірочок та платформ
+    this.physics.add.collider(stars, platforms);
+
+    //  стикання колайдера гравця з колайдером зірочок
+    this.physics.add.overlap(player, stars, collectStar, null, this);
 }
 
 function update() 
@@ -103,4 +122,10 @@ function update()
     if (cursors.up.isDown && player.body.touching.down) {
         player.setVelocityY(-330);
     }
+}
+
+//функція збір зірочок
+function collectStar (player, star)
+{
+    star.disableBody(true, true);
 }
